@@ -1,18 +1,229 @@
-body{margin:0;font-family:Segoe UI;background:#f4f6f9;}
+/* ==========================================================================
+   BASE & THEME VARIABLES
+   ========================================================================== */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f6f9;
+    color: #1e293b;
+    transition: 0.3s;
+}
 
-.sidebar{width:220px;height:100vh;background:#081b29;color:white;position:fixed;padding:20px;}
-.sidebar h2{color:#00abf0;}
-.sidebar a{display:block;margin:10px;color:white;text-decoration:none;padding:8px;border-radius:6px;}
-.sidebar a:hover{background:#00abf0;}
+body.dark {
+    background: #0f172a;
+    color: #f8fafc;
+}
 
-.topbar{position:fixed;left:220px;right:0;height:50px;background:#081b29;color:white;display:flex;align-items:center;padding-left:20px;}
+/* ==========================================================================
+   DESKTOP DEFAULT LAYOUT (1200px+)
+   ========================================================================== */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background: #020617;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    z-index: 1010;
+}
 
-.main{margin-left:240px;margin-top:70px;padding:20px;}
+.sidebar h2 {
+    color: #00abf0;
+    margin-bottom: 30px;
+    padding-left: 8px;
+    font-size: 1.5rem;
+}
 
-.card{background:white;padding:20px;border-radius:10px;text-align:center;margin-bottom:20px;}
+.sidebar a, .sidebar .nav-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin: 12px 0;
+    color: white;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    text-align: left;
+    font-size: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-sizing: border-box;
+}
 
-.cards{display:flex;gap:20px;}
+.sidebar a:visited {
+    color: white;
+}
 
-table{width:100%;background:white;border-collapse:collapse;}
-td,th{padding:10px;border:1px solid #ddd;text-align:center;}
-th{background:#00abf0;color:white;}
+.sidebar a:hover, .sidebar .nav-btn:hover, .sidebar .nav-btn.active {
+    background: #2563eb;
+    transform: translateX(6px);
+}
+
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 250px;
+    right: 0;
+    height: 50px;
+    background: #081b29;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
+}
+
+.main {
+    margin-left: 270px;
+    margin-top: 70px;
+    padding: 20px;
+}
+
+/* FLUID LAYOUT UPGRADES FOR METRIC & INTERACTIVE CARDS */
+.card {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto 20px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    text-align: center;
+    transition: 0.3s;
+}
+
+body.dark .card {
+    background: #1e293b;
+}
+
+/* TELEMETRY METRIC GRID MODULES */
+.cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+/* NESTED INDIVIDUAL CARDS IN A METRICS LOOP */
+.cards .card {
+    flex: 1;
+    min-width: 220px;
+    max-width: 100%;
+    padding: 25px;
+    margin: 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.cards .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* TABULAR LOG MODULES */
+table {
+    width: 100%;
+    background: white;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+body.dark table {
+    background: #1e293b;
+}
+
+td, th {
+    padding: 14px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+body.dark td, body.dark th {
+    border-color: #334155;
+}
+
+th {
+    background: #2563eb;
+    color: white;
+}
+
+/* ==========================================================================
+   MOBILE & TABLET RESPONSIVE VIEW BREAKPOINT (768px and down)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .sidebar h2 {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .sidebar a, .sidebar .nav-btn {
+        margin: 8px 0;
+        text-align: center;
+    }
+
+    .sidebar a:hover, .sidebar .nav-btn:hover, .sidebar .nav-btn.active {
+        transform: none; /* Disables slide translations on stacked mobile views */
+    }
+
+    .topbar {
+        position: relative;
+        left: 0;
+        width: 100%;
+        height: auto;
+        padding: 12px;
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+        box-sizing: border-box;
+    }
+
+    .main {
+        margin-left: 0;
+        margin-top: 20px;
+        padding: 10px;
+    }
+
+    /* FORCES THE CARDS SCROLL OR UNFOLD VERTICALLY ON MOBILE HOUSES */
+    .cards {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .card, .cards .card {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    /* ADAPTIVE TABLE OVERFLOW CONTEXT FOR SMARTPHONES */
+    table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    input, button, .btn {
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+}
