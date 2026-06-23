@@ -797,7 +797,7 @@ function sendData() {
 
     let values = valInput.split(",").map(Number);
 
-    fetch("http://127.0.0.1:5000/predict", {
+    fetch("https://sentinelai-1-wpf0.onrender.com/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ features: values })
@@ -901,7 +901,7 @@ function updateAIInsight(total, attacks, critical){
 }
 
 function loadDashboard() {
-    fetch("http://127.0.0.1:5000/logs")
+    fetch("https://sentinelai-1-wpf0.onrender.com/logs")
     .then(res => res.json())
     .then(data => {
         let total = data.length;
@@ -1117,11 +1117,11 @@ function toggleAuto(){
 }
 
 function downloadReport() {
-    window.location.href = "http://127.0.0.1:5000/export_report";
+    window.location.href = "https://sentinelai-1-wpf0.onrender.com/export_report";
 }
 
 function clearLogs(){
-    fetch("http://127.0.0.1:5000/clear_logs",{ method:"POST" })
+    fetch("https://sentinelai-1-wpf0.onrender.com/clear_logs",{ method:"POST" })
     .then(() => { location.reload(); });
 }
 
