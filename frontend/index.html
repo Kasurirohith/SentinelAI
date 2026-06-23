@@ -446,12 +446,15 @@ body.dark .project-info {
     transform: scale(1.08) rotate(5deg);
 }
 
+/* DECREASED CHAT CONTAINER SIZE FOR MOBILE OVERLAY PROTECTION */
 .chat-container {
     position: fixed;
     bottom: 110px;
     right: 30px;
-    width: 380px;
-    height: 500px;
+    width: 340px;
+    max-width: 85vw;
+    height: 440px;
+    max-height: 65vh;
     background: white;
     border-radius: 20px;
     box-shadow: 0 12px 40px rgba(0,0,0,0.15);
@@ -694,7 +697,6 @@ body.dark footer {
 
     <button id="themeBtn" onclick="toggleDark()" class="theme-btn">🌙 Dark Mode</button>
 
-    <!-- SECTION 1: UNIFIED INTERACTIVE WORKSPACE TERMINAL -->
     <div id="home-panel" class="page-section active">
         <div class="app-card">
             <div class="info-card">
@@ -741,7 +743,6 @@ body.dark footer {
         </div>
     </div>
 
-    <!-- SECTION 2: UNIFIED SOC VISUALIZATION DASHBOARD -->
     <div id="soc-panel" class="page-section">
         <div style="margin-bottom: 20px;">
             <button onclick="clearLogs()" style="background: #ef4444; color: white; padding: 12px 20px; border: none; border-radius: 10px; cursor: pointer; font-weight: 600;">
@@ -1124,6 +1125,7 @@ function loadDashboard() {
             options: { responsive: true, maintainAspectRatio: false }
         });
 
+        // --- DEFENSIVE SAFE BOUNDED TREND CHART MAPPING ENGINE ---
         let trendData = [];
         let labels = [];
         if(data.length === 1) {
@@ -1360,6 +1362,7 @@ setInterval(() => {
 
 // Initialize system pipelines directly on bootup
 window.onload = () => {
+    autoMode = true;
     interval = setInterval(autoGenerate, 4000);
     setInterval(loadDashboard, 4000);
     
