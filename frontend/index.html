@@ -115,22 +115,6 @@ body.dark {
     font-size: 1.1rem;
 }
 
-.features {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-}
-
-.features div {
-    background: rgba(255, 255, 255, 0.15);
-    padding: 8px 16px;
-    border-radius: 30px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    backdrop-filter: blur(5px);
-}
-
 /* METRIC CARDS GRID */
 .cards {
     display: flex;
@@ -636,10 +620,6 @@ body.dark footer {
         line-height: 1.3;
     }
     
-    .features {
-        justify-content: center;
-    }
-    
     .cards {
         flex-direction: column;
         gap: 15px;
@@ -687,12 +667,6 @@ body.dark footer {
     <div class="hero">
         <h1>AI-Powered Network Intrusion Detection & Threat Intelligence Platform</h1>
         <p>SentinelAI Pipeline Control Matrix</p>
-        <div class="features">
-            <div>🤖 AI Detection Engine</div>
-            <div>🛡️ Real-Time Monitoring</div>
-            <div>📊 Threat Analytics</div>
-            <div>🚨 Attack Classification</div>
-        </div>
     </div>
 
     <button id="themeBtn" onclick="toggleDark()" class="theme-btn">🌙 Dark Mode</button>
@@ -738,7 +712,7 @@ body.dark footer {
         <div class="project-info">
             <h2 style="margin-top: 0; color: #2563eb;">About Project</h2>
             <p style="line-height: 1.6; margin: 0; font-size: 1.05rem; opacity: 0.85;">
-                SentinelAI is an intelligent intrusion detection and threat intelligence platform that uses Machine Learning based Random Forest Classification to analyze raw network metadata streams. The platform correlates high-density telemetry data to accurately filter traffic signatures, predict localized structural vulnerabilities, apply rule-based tactical assessment logs, and dynamically dispatch real-time remediation protocols across complex networking topologies.
+                SentinelAI is an intelligent intrusion detection and threat intelligence platform that analyzes raw network metadata streams using Random Forest classification. It correlates high-density telemetry data to accurately isolate traffic signatures and dynamically dispatch real-time remediation protocols.
             </p>
         </div>
     </div>
