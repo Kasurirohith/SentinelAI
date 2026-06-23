@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SentinelAI - Control Panel</title>
-
 <style>
 body {
     margin: 0;
@@ -16,9 +9,10 @@ body {
 
 body.dark {
     background: #0f172a;
-    color: white;
+    color: #f8fafc;
 }
 
+/* SIDEBAR NAVIGATION (DESKTOP) */
 .sidebar {
     width: 250px;
     height: 100vh;
@@ -29,12 +23,15 @@ body.dark {
     left: 0;
     padding: 20px;
     box-shadow: 4px 0 20px rgba(0,0,0,.2);
+    box-sizing: border-box;
+    z-index: 1010;
 }
 
 .sidebar h2 {
     color: #00abf0;
     margin-bottom: 30px;
     padding-left: 8px;
+    font-size: 1.5rem;
 }
 
 .sidebar a {
@@ -57,6 +54,7 @@ body.dark {
     transform: translateX(6px);
 }
 
+/* TOPBAR */
 .topbar {
     position: fixed;
     top: 0;
@@ -67,16 +65,19 @@ body.dark {
     color: white;
     display: flex;
     align-items: center;
-    padding-left: 20px;
+    justify-content: space-between;
+    padding: 0 20px;
     z-index: 1000;
 }
 
+/* MAIN PANEL LAYOUT */
 .main {
     margin-left: 270px;
     margin-top: 70px;
     padding: 20px;
 }
 
+/* SYSTEM HERO BANNER */
 .hero {
     background: linear-gradient(135deg, #0f172a, #1e40af);
     color: white;
@@ -97,8 +98,24 @@ body.dark {
     font-size: 1.1rem;
 }
 
-/* FLUID FLAVORED HOME FRAME GRID CARD */
-.card {
+.features {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.features div {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    backdrop-filter: blur(5px);
+}
+
+/* FLEXIBLE CARD ENGINE */
+.app-card {
     width: 100%;
     max-width: 700px;
     margin: auto;
@@ -106,10 +123,11 @@ body.dark {
     padding: 40px;
     border-radius: 24px;
     box-shadow: 0 15px 40px rgba(0,0,0,.1);
-    transition: 0.3s;
+    text-align: center;
+    box-sizing: border-box;
 }
 
-body.dark .card {
+body.dark .app-card {
     background: #1e293b;
 }
 
@@ -118,7 +136,7 @@ body.dark .card {
     color: #0369a1;
     padding: 15px 20px;
     border-radius: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     text-align: left;
     border-left: 4px solid #0284c7;
 }
@@ -151,24 +169,24 @@ input {
     font-size: 1rem;
 }
 
-button {
-    margin-top: 15px;
-    padding: 12px 20px;
+.btn {
+    padding: 12px 24px;
     background: #2563eb;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     font-weight: bold;
     color: white;
     transition: 0.3s;
+    margin-top: 15px;
 }
 
-button:hover {
+.btn:hover {
     background: #1d4ed8;
 }
 
 .theme-btn {
-    background: #0f172a;
+    background: #020617;
     color: white;
     border: none;
     padding: 12px 20px;
@@ -176,21 +194,17 @@ button:hover {
     cursor: pointer;
     font-weight: 600;
     transition: .3s;
-    margin-bottom: 15px;
-}
-
-.theme-btn:hover {
-    transform: translateY(-2px);
+    margin-bottom: 25px;
 }
 
 body.dark .theme-btn {
     background: white;
-    color: #0f172a;
+    color: #020617;
 }
 
 .result-box {
-    margin-top: 20px;
-    padding: 15px;
+    margin-top: 25px;
+    padding: 20px;
     border-radius: 12px;
     background: #f8fafc;
     border-left: 5px solid #2563eb;
@@ -206,6 +220,24 @@ body.dark .result-box {
     margin-top: 5px;
     font-size: 18px;
     line-height: 1.5;
+}
+
+.recommend-box {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    background: #f1f5f9;
+    border: 1px dashed #cbd5e1;
+}
+
+body.dark .recommend-box {
+    background: #1e293b;
+    border-color: #475569;
+}
+
+.recommend-box h3 {
+    margin: 0 0 5px 0;
+    color: #2563eb;
 }
 
 #alertBox {
@@ -225,6 +257,7 @@ body.dark .result-box {
     border: 1px solid #2563eb;
     text-align: left;
     transition: 0.3s;
+    box-sizing: border-box;
 }
 
 body.dark .rec-card {
@@ -238,113 +271,116 @@ body.dark .rec-card {
     font-size: 1.2rem;
 }
 
+body.dark .rec-card h3 {
+    color: #3b82f6;
+}
+
 .rec-card p {
     margin: 0;
     font-weight: 500;
     line-height: 1.5;
 }
 
-/* ==========================================================================
-   MOBILE RESPONSIVE DESIGN BREAKPOINT APPLICATOR
-   ========================================================================== */
-@media (max-width: 768px) {
+.project-info {
+    max-width: 700px;
+    margin: 40px auto 10px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.05);
+    text-align: left;
+    box-sizing: border-box;
+}
+
+body.dark .project-info {
+    background: #1e293b;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+    border-top: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+body.dark footer {
+    border-top-color: #334155;
+    color: #94a3b8;
+}
+
+/* ==========================================
+   MOBILE CRITICAL LAYOUT OVERRIDES (index.html)
+   ========================================== */
+@media screen and (max-width: 768px) {
     .sidebar {
         width: 100%;
         height: auto;
         position: relative;
-        padding: 15px;
+        padding: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
-
+    
     .sidebar h2 {
         text-align: center;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
-
+    
     .sidebar a {
-        margin: 8px 0;
+        display: inline-block;
+        width: 45%;
+        margin: 5px 2.5%;
         text-align: center;
+        padding: 10px;
     }
-
+    
     .topbar {
-        left: 0;
         position: relative;
+        left: 0;
+        width: 100%;
         height: auto;
         padding: 12px;
         flex-direction: column;
         text-align: center;
-        gap: 5px;
+        box-sizing: border-box;
     }
-
+    
     .main {
         margin-left: 0;
-        margin-top: 20px;
+        margin-top: 15px;
         padding: 10px;
     }
-
+    
     .hero {
         padding: 20px;
         text-align: center;
     }
-
+    
     .hero h1 {
-        font-size: 1.5rem;
-        line-height: 1.4;
+        font-size: 1.4rem;
+        line-height: 1.3;
     }
-
-    .hero p {
-        font-size: 1rem;
-    }
-
+    
     .features {
         justify-content: center;
     }
-
-    .cards {
-        flex-direction: column;
-    }
-
-    .card {
-        min-width: auto;
+    
+    .app-card, .rec-card, .project-info {
         width: 100% !important;
-        box-sizing: border-box;
-        padding: 20px;
+        max-width: 100% !important;
+        padding: 20px !important;
     }
-
-    .chart-box {
-        width: 100%;
-        height: 300px;
+    
+    div[style*="display: flex"] {
+        flex-direction: column;
+        gap: 10px;
     }
-
-    table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-
-    .card.ai-panel {
-        min-width: 100%;
-    }
-
-    footer {
-        font-size: 14px;
-        padding: 15px;
-    }
-
-    input {
-        width: 100%;
-    }
-
-    button {
-        width: 100%;
-    }
-
-    #liveClock {
-        font-size: 12px;
-    }
-
-    #chatbotButton {
-        bottom: 15px;
-        right: 15px;
+    
+    .btn, #toggleBtn {
+        width: 100% !important;
+        margin-top: 5px;
     }
 }
 </style>
