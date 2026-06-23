@@ -248,50 +248,7 @@ body.dark .card.ai-panel h3 {
     100% { opacity: 1; }
 }
 
-/* HOME ANALYSIS MODULE CONTAINER */
-.app-card {
-    max-width: 700px;
-    margin: auto;
-    background: white;
-    padding: 40px;
-    border-radius: 24px;
-    box-shadow: 0 15px 40px rgba(0,0,0,.1);
-    text-align: center;
-}
-
-body.dark .app-card {
-    background: #1e293b;
-}
-
-.info-card {
-    background: #e0f2fe;
-    color: #0369a1;
-    padding: 15px 20px;
-    border-radius: 12px;
-    margin-bottom: 25px;
-    text-align: left;
-    border-left: 4px solid #0284c7;
-}
-
-body.dark .info-card {
-    background: #0c4a6e;
-    color: #e0f2fe;
-    border-left-color: #38bdf8;
-}
-
-input {
-    width: 100%;
-    padding: 14px;
-    margin-top: 15px;
-    border-radius: 8px;
-    border: 2px solid #2563eb;
-    box-sizing: border-box;
-    background: transparent;
-    color: inherit;
-    font-size: 1rem;
-}
-
-/* BUTTON CONTROLS */
+/* AUTOMATED DISPATCH BUTTON CONTROLS */
 .btn {
     padding: 12px 24px;
     background: #2563eb;
@@ -576,6 +533,110 @@ footer {
 body.dark footer {
     border-top-color: #334155;
     color: #94a3b8;
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVE DESIGN BREAKPOINT APPLICATOR
+   ========================================================================== */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 15px;
+    }
+
+    .sidebar h2 {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .sidebar a {
+        margin: 8px 0;
+        text-align: center;
+    }
+
+    .topbar {
+        left: 0;
+        position: relative;
+        height: auto;
+        padding: 12px;
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+    }
+
+    .main {
+        margin-left: 0;
+        margin-top: 20px;
+        padding: 10px;
+    }
+
+    .hero {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 1.5rem;
+        line-height: 1.4;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .features {
+        justify-content: center;
+    }
+
+    .cards {
+        flex-direction: column;
+    }
+
+    .card {
+        min-width: auto;
+        width: 100% !important;
+        box-sizing: border-box;
+        padding: 20px;
+    }
+
+    .chart-box {
+        width: 100%;
+        height: 300px;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .card.ai-panel {
+        min-width: 100%;
+    }
+
+    footer {
+        font-size: 14px;
+        padding: 15px;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    #liveClock {
+        font-size: 12px;
+    }
+
+    #chatbotButton {
+        bottom: 15px;
+        right: 15px;
+    }
 }
 </style>
 </head>
