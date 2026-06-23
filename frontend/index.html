@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberShield AI - Control Panel</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f6f9;
+    color: #1e293b;
+    transition: 0.3s;
+}
+
+body.dark {
+    background: #0f172a;
+    color: #f8fafc;
+}
+
+/* SIDEBAR NAVIGATION */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background: #020617;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    box-shadow: 4px 0 20px rgba(0,0,0,.2);
+    box-sizing: border-box;
+    z-index: 1010;
+}
+
+.sidebar h2 {
+    color: #00abf0;
+    margin-bottom: 30px;
+    padding-left: 8px;
+    font-size: 1.5rem;
+}
+
+.sidebar a {
+    display: block;
+    padding: 14px;
+    margin: 12px 0;
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: .3s;
+}
+
+.sidebar a:visited {
+    color: white;
+}
+
+.sidebar a:hover {
+    background: #2563eb;
+    transform: translateX(6px);
+}
+
+/* TOPBAR */
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 250px;
+    right: 0;
+    height: 50px;
+    background: #081b29;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
+}
+
+/* MAIN PANEL LAYOUT */
+.main {
+    margin-left: 270px;
+    margin-top: 70px;
+    padding: 20px;
+}
+
+/* SYSTEM HERO BANNER */
+.hero {
+    background: linear-gradient(135deg, #0f172a, #1e40af);
+    color: white;
+    padding: 35px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+
+.hero h1 {
+    margin: 0 0 10px 0;
+    font-size: 2rem;
+}
+
+.hero p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+.features {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.features div {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    backdrop-filter: blur(5px);
+}
+
+/* HOME ANALYSIS MODULE CONTAINER */
+.app-card {
+    max-width: 700px;
+    margin: auto;
+    background: white;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.1);
+    text-align: center;
+    transition: 0.3s;
+}
+
+body.dark .app-card {
+    background: #1e293b;
+}
+
+.info-card {
+    background: #e0f2fe;
+    color: #0369a1;
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    text-align: left;
+    border-left: 4px solid #0284c7;
+}
+
+body.dark .info-card {
+    background: #0c4a6e;
+    color: #e0f2fe;
+    border-left-color: #38bdf8;
+}
+
+.info-card h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+}
+
+.info-card p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    border-radius: 8px;
+    border: 2px solid #2563eb;
+    box-sizing: border-box;
+    background: transparent;
+    color: inherit;
+    font-size: 1rem;
+}
+
+/* BUTTON CONTROLS */
+.btn {
+    padding: 12px 24px;
+    background: #2563eb;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    transition: 0.3s;
+    margin-top: 15px;
+}
+
+.btn:hover {
+    background: #1d4ed8;
+}
+
+.theme-btn {
+    background: #020617;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .3s;
+    margin-bottom: 25px;
+}
+
+.theme-btn:hover {
+    transform: translateY(-2px);
+}
+
+body.dark .theme-btn {
+    background: white;
+    color: #020617;
+}
+
+/* ANALYSIS OUTPUT WRAPPERS */
+.result-box {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 12px;
+    background: #f8fafc;
+    border-left: 5px solid #2563eb;
+    text-align: left;
+}
+
+body.dark .result-box {
+    background: #334155;
+    border-left-color: #3b82f6;
+}
+
+#result {
+    margin-top: 5px;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.recommend-box {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    background: #f1f5f9;
+    border: 1px dashed #cbd5e1;
+}
+
+body.dark .recommend-box {
+    background: #1e293b;
+    border-color: #475569;
+}
+
+.recommend-box h3 {
+    margin: 0 0 5px 0;
+    color: #2563eb;
+}
+
+#alertBox {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    display: none;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* STEP 9: RECOMMENDATION INTERFACE CARD STYLE */
+.rec-card {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 18px;
+    background: white;
+    border: 1px solid #2563eb;
+    text-align: left;
+    transition: 0.3s;
+}
+
+body.dark .rec-card {
+    background: #1e293b;
+    border-color: #3b82f6;
+}
+
+.rec-card h3 {
+    margin: 0 0 10px 0;
+    color: #2563eb;
+    font-size: 1.2rem;
+}
+
+body.dark .rec-card h3 {
+    color: #3b82f6;
+}
+
+.rec-card p {
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.project-info {
+    max-width: 700px;
+    margin: 40px auto 10px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.05);
+    text-align: left;
+}
+
+body.dark .project-info {
+    background: #1e293b;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+    border-top: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+body.dark footer {
+    border-top-color: #334155;
+    color: #94a3b8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>CyberShield AI</h2>
+    <a href="index.html" style="background: #2563eb;">🏠 Home</a>
+    <a href="dashboard.html">📊 Dashboard</a>
+</div>
+
+<div class="topbar">
+    <div>System Active 🟢 | Traffic Pipeline Verification</div>
+    <span id="liveClock" style="font-weight: 600; font-family: monospace; letter-spacing: 0.5px;"></span>
+</div>
+
+<div class="main">
+
+    <div class="hero">
+        <h1>AI-Powered Network Intrusion Detection System</h1>
+        <p>AI-Powered Network Intrusion Detection & Threat Intelligence Platform</p>
+        <div class="features">
+            <div>🤖 AI Detection Engine</div>
+            <div>🛡️ Real-Time Monitoring</div>
+            <div>📊 Threat Analytics</div>
+            <div>🚨 Attack Classification</div>
+        </div>
+    </div>
+
+    <button id="themeBtn" onclick="toggleDark()" class="theme-btn">🌙 Dark Mode</button>
+
+    <div class="app-card">
+        <div class="info-card">
+            <h3>System Status</h3>
+            <p>Monitoring live network traffic using AI-powered intrusion detection.</p>
+        </div>
+
+        <h2>Enter Network Data</h2>
+
+        <input type="text" id="data" placeholder="Enter: 10,20,30">
+
+        <div style="display: flex; gap: 10px; justify-content: center;">
+            <button class="btn" onclick="sendData()">Analyze</button>
+            <button class="btn" id="toggleBtn" onclick="toggleAuto()" style="background: #00abf0;">Auto Mode: ON</button>
+        </div>
+
+        <div class="result-box">
+            <p style="margin-top: 0;"><b>Result:</b></p>
+            <p id="result">Awaiting network streaming updates...</p>
+            <div id="threatBadge"></div>
+        </div>
+
+        <div class="rec-card">
+            <h3><h3>🛡️ Security Recommendation</h3></h3>
+            <p id="recommendation">Waiting...</p>
+        </div>
+
+        <p style="text-align: left; margin-top: 20px; margin-bottom: 5px;"><b>System Alert:</b></p>
+        <div id="alertBox"></div>
+
+        <div style="margin-top:25px; font-size:14px; opacity: 0.8; font-weight: 500;">
+            <b>Model:</b> Random Forest | <b>Dataset:</b> NSL-KDD | <b>Accuracy:</b> 92.4%
+        </div>
+    </div>
+
+    <div class="project-info">
+        <h2 style="margin-top: 0; color: #2563eb;">About Project</h2>
+        <p style="line-height: 1.6; margin: 0; font-size: 1.05rem; opacity: 0.85;">
+            CyberShield AI is an intelligent intrusion detection and threat intelligence platform that uses Machine Learning based Random Forest Classification to analyze raw network metadata streams. The platform correlates high-density telemetry data to accurately filter traffic signatures, predict localized structural vulnerabilities, apply rule-based tactical assessment logs, and dynamically dispatch real-time remediation protocols across complex networking topologies.
+        </p>
+    </div>
+
+    <footer>
+        AI-Powered Network Intrusion Detection and Threat Intelligence Platform
+        <br>
+        Developed By Kasuri Rohith | B.Tech CSE
+    </footer>
+</div>
+
+<script>
+function sendData() {
+    let result = document.getElementById("result");
+    result.innerHTML = "Analyzing...";
+    result.style.color = "inherit";
+
+    let values = document.getElementById("data").value.split(",").map(Number);
+
+    fetch("http://127.0.0.1:5000/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ features: values })
+    })
+    .then(res => res.json())
+    .then(data => {
+        let alertBox = document.getElementById("alertBox");
+        let badge = document.getElementById("threatBadge");
+        let rec = document.getElementById("recommendation");
+
+        if (data.result === 1) {
+            result.innerHTML = `🚨 Exploit Intercepted: ${data.attack_type}`;
+            result.style.color = "red";
+
+            let color = "#ef4444";
+            if (data.threat_level === "CRITICAL") {
+                color = "#dc2626";
+            } else if (data.threat_level === "HIGH") {
+                color = "#f97316";
+            } else if (data.threat_level === "MEDIUM") {
+                color = "#eab308";
+            }
+
+            alertBox.style.display = "block";
+            alertBox.style.background = color;
+            alertBox.style.color = "white";
+            alertBox.innerHTML = `⚠️ ${data.threat_level} THREAT DETECTED`;
+        } else {
+            result.innerHTML = "✅ Normal Traffic Configuration Passed";
+            result.style.color = "green";
+
+            alertBox.style.display = "block";
+            alertBox.style.background = "green";
+            alertBox.style.color = "white";
+            alertBox.innerHTML = "System Secure ✔";
+        }
+
+        result.innerHTML += `
+        <br><br>
+        <b>Confidence:</b> ${data.confidence || 0}%
+        <br>
+        <b>Threat Level:</b> ${data.threat_level}
+        <br>
+        <b>Attack Type:</b> ${data.attack_type}
+        <br>
+        <b>Time:</b> ${data.time}
+        `;
+
+        badge.innerHTML = `
+        <h3 style="
+        padding:10px;
+        border-radius:8px;
+        background:#111827;
+        color:white;
+        margin:15px 0;
+        text-align:center;">
+        Threat Level : ${data.threat_level}
+        </h3>`;
+
+        // ==================================================================
+        // STEP 9: INTERACTIVE AI RECOMMENDATION GENERATION JAVASCRIPT
+        // ==================================================================
+        if(data.threat_level === "CRITICAL"){
+            rec.innerHTML = "Block source IP immediately, enable firewall filtering and perform packet inspection.";
+            rec.style.color = "#dc2626";
+        }
+        else if(data.threat_level === "HIGH"){
+            rec.innerHTML = "Review logs and monitor unusual traffic patterns.";
+            rec.style.color = "#f97316";
+        }
+        else {
+            rec.innerHTML = "Continue monitoring network traffic.";
+            rec.style.color = "#16a34a";
+        }
+    });
+}
+
+let autoMode = true;
+let interval;
+
+function autoGenerate(){
+    let v1 = Math.floor(Math.random() * 150); 
+    let v2 = Math.floor(Math.random() * 150);
+    let v3 = Math.floor(Math.random() * 150);
+
+    document.getElementById("data").value = `${v1},${v2},${v3}`;
+    sendData();
+}
+
+function toggleAuto(){
+    let btn = document.getElementById("toggleBtn");
+
+    if (autoMode) {
+        clearInterval(interval);
+        autoMode = false;
+        btn.innerText = "Auto Mode: OFF";
+        btn.style.background = "gray";
+    } else {
+        interval = setInterval(autoGenerate, 4000);
+        autoMode = true;
+        btn.innerText = "Auto Mode: ON";
+        btn.style.background = "#00abf0";
+    }
+}
+
+function toggleDark(){
+    document.body.classList.toggle("dark");
+    const btn = document.getElementById("themeBtn");
+
+    if(document.body.classList.contains("dark")){
+        localStorage.setItem("theme","dark");
+        btn.innerHTML="☀️ Light Mode";
+    }else{
+        localStorage.setItem("theme","light");
+        btn.innerHTML="🌙 Dark Mode";
+    }
+}
+
+// LIVE SOC TOPBAR DIGITAL CLOCK LIFECYCLE
+setInterval(() => {
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, '0');
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const month = months[now.getMonth()];
+    const year = now.getFullYear();
+    const time = now.toTimeString().split(' ')[0];
+    document.getElementById("liveClock").innerHTML = `${day}-${month}-${year} ${time}`;
+}, 1000);
+
+window.onload=()=>{
+    const theme = localStorage.getItem("theme");
+    const btn = document.getElementById("themeBtn");
+
+    if(theme==="dark"){
+        document.body.classList.add("dark");
+        btn.innerHTML="☀️ Light Mode";
+    } else {
+        btn.innerHTML="🌙 Dark Mode";
+    }
+}
+
+interval = setInterval(autoGenerate, 4000);
+</script>
+</body>
+</html>
