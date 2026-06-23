@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SentinelAI - Control Panel</title>
+
 <style>
 body {
     margin: 0;
@@ -12,7 +19,7 @@ body.dark {
     color: #f8fafc;
 }
 
-/* SIDEBAR NAVIGATION (DESKTOP) */
+/* SIDEBAR NAVIGATION */
 .sidebar {
     width: 250px;
     height: 100vh;
@@ -114,7 +121,7 @@ body.dark {
     backdrop-filter: blur(5px);
 }
 
-/* FLEXIBLE CARD ENGINE */
+/* HOME ANALYSIS MODULE CONTAINER */
 .app-card {
     width: 100%;
     max-width: 700px;
@@ -124,6 +131,7 @@ body.dark {
     border-radius: 24px;
     box-shadow: 0 15px 40px rgba(0,0,0,.1);
     text-align: center;
+    transition: 0.3s;
     box-sizing: border-box;
 }
 
@@ -169,6 +177,7 @@ input {
     font-size: 1rem;
 }
 
+/* BUTTON CONTROLS */
 .btn {
     padding: 12px 24px;
     background: #2563eb;
@@ -197,11 +206,16 @@ input {
     margin-bottom: 25px;
 }
 
+.theme-btn:hover {
+    transform: translateY(-2px);
+}
+
 body.dark .theme-btn {
     background: white;
     color: #020617;
 }
 
+/* ANALYSIS OUTPUT WRAPPERS */
 .result-box {
     margin-top: 25px;
     padding: 20px;
@@ -249,6 +263,7 @@ body.dark .recommend-box {
     text-align: center;
 }
 
+/* RECOMMENDATION INTERFACE CARD STYLE */
 .rec-card {
     margin-top: 20px;
     padding: 20px;
@@ -311,9 +326,9 @@ body.dark footer {
     color: #94a3b8;
 }
 
-/* ==========================================
-   MOBILE CRITICAL LAYOUT OVERRIDES (index.html)
-   ========================================== */
+/* ==========================================================================
+   MOBILE RESPONSIVE DESIGN BREAKPOINT APPLICATOR
+   ========================================================================== */
 @media screen and (max-width: 768px) {
     .sidebar {
         width: 100%;
@@ -395,7 +410,8 @@ body.dark footer {
 </div>
 
 <div class="topbar">
-    System Active 🟢 | SentinelAI Monitoring
+    <div>System Active 🟢 | Traffic Pipeline Verification</div>
+    <span id="liveClock" style="font-weight: 600; font-family: monospace; letter-spacing: 0.5px;"></span>
 </div>
 
 <div class="main">
@@ -403,13 +419,19 @@ body.dark footer {
     <div class="hero">
         <h1>AI-Powered Network Intrusion Detection System</h1>
         <p>AI-Powered Network Intrusion Detection & Threat Intelligence Platform</p>
+        <div class="features">
+            <div>🤖 AI Detection Engine</div>
+            <div>🛡️ Real-Time Monitoring</div>
+            <div>📊 Threat Analytics</div>
+            <div>🚨 Attack Classification</div>
+        </div>
     </div>
 
     <button id="themeBtn" onclick="toggleDark()" class="theme-btn">
         Theme Loading...
     </button>
 
-    <div class="card">
+    <div class="app-card">
         <div class="info-card">
             <h3>System Status</h3>
             <p>Monitoring live network traffic using AI-powered intrusion detection.</p>
@@ -420,8 +442,8 @@ body.dark footer {
         <input type="text" id="data" placeholder="Enter: 10,20,30">
 
         <div style="display: flex; gap: 10px; justify-content: center;">
-            <button onclick="sendData()">Analyze</button>
-            <button onclick="toggleAuto()" id="toggleBtn" style="background: #00abf0;">Auto Mode: ON</button>
+            <button class="btn" onclick="sendData()">Analyze</button>
+            <button class="btn" id="toggleBtn" onclick="toggleAuto()" style="background: #00abf0;">Auto Mode: ON</button>
         </div>
 
         <div class="result-box">
@@ -438,10 +460,8 @@ body.dark footer {
         <p style="text-align: left; margin-top: 20px; margin-bottom: 5px;"><b>System Alert:</b></p>
         <div id="alertBox"></div>
 
-        <div style="margin-top:20px; font-size:14px; opacity: 0.8;">
-            <b>Model:</b> Random Forest |
-            <b>Dataset:</b> NSL-KDD |
-            <b>Accuracy:</b> 92.4%
+        <div style="margin-top:25px; font-size:14px; opacity: 0.8;">
+            <b>Model:</b> Random Forest | <b>Dataset:</b> NSL-KDD | <b>Accuracy:</b> 92.4%
         </div>
     </div>
 </div>
@@ -569,6 +589,17 @@ function toggleDark(){
         btn.innerHTML="🌙 Dark Mode";
     }
 }
+
+// LIVE TOPBAR CLOCK
+setInterval(() => {
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, '0');
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const month = months[now.getMonth()];
+    const year = now.getFullYear();
+    const time = now.toTimeString().split(' ')[0];
+    document.getElementById("liveClock").innerHTML = `${day}-${month}-${year} ${time}`;
+}, 1000);
 
 window.onload=()=>{
     const theme = localStorage.getItem("theme");

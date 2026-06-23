@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SentinelAI Platform</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <style>
 body {
     margin: 0;
@@ -241,125 +249,6 @@ body.dark .card.ai-panel h3 {
     100% { opacity: 1; }
 }
 
-/* HOME ANALYSIS MODULE CONTAINER */
-.app-card {
-    max-width: 700px;
-    margin: auto;
-    background: white;
-    padding: 40px;
-    border-radius: 24px;
-    box-shadow: 0 15px 40px rgba(0,0,0,.1);
-    text-align: center;
-    box-sizing: border-box;
-}
-
-body.dark .app-card {
-    background: #1e293b;
-}
-
-.info-card {
-    background: #e0f2fe;
-    color: #0369a1;
-    padding: 15px 20px;
-    border-radius: 12px;
-    margin-bottom: 25px;
-    text-align: left;
-    border-left: 4px solid #0284c7;
-}
-
-body.dark .info-card {
-    background: #0c4a6e;
-    color: #e0f2fe;
-    border-left-color: #38bdf8;
-}
-
-input {
-    width: 100%;
-    padding: 14px;
-    margin-top: 15px;
-    border-radius: 8px;
-    border: 2px solid #2563eb;
-    box-sizing: border-box;
-    background: transparent;
-    color: inherit;
-    font-size: 1rem;
-}
-
-/* BUTTON CONTROLS */
-.btn {
-    padding: 12px 24px;
-    background: #2563eb;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    color: white;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background: #1d4ed8;
-}
-
-.theme-btn {
-    background: #020617;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: .3s;
-    margin-bottom: 25px;
-}
-
-body.dark .theme-btn {
-    background: white;
-    color: #020617;
-}
-
-/* ANALYSIS OUTPUT WRAPPERS */
-.result-box {
-    margin-top: 25px;
-    padding: 20px;
-    border-radius: 12px;
-    background: #f8fafc;
-    border-left: 5px solid #2563eb;
-    text-align: left;
-}
-
-body.dark .result-box {
-    background: #334155;
-    border-left-color: #3b82f6;
-}
-
-.recommend-box {
-    margin-top: 15px;
-    padding: 15px;
-    border-radius: 12px;
-    background: #f1f5f9;
-    border: 1px dashed #cbd5e1;
-}
-
-body.dark .recommend-box {
-    background: #1e293b;
-    border-color: #475569;
-}
-
-.recommend-box h3 {
-    margin: 0 0 5px 0;
-    color: #2563eb;
-}
-
-#alertBox {
-    margin-top: 15px;
-    padding: 12px;
-    border-radius: 8px;
-    display: none;
-    font-weight: bold;
-    text-align: center;
-}
-
 /* SOC EXPANDED CHARTS */
 .chart-box {
     width: 90%;
@@ -396,21 +285,6 @@ body.dark th, body.dark td {
 th {
     background: #2563eb;
     color: white;
-}
-
-.project-info {
-    max-width: 700px;
-    margin: 40px auto 10px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.05);
-    text-align: left;
-    box-sizing: border-box;
-}
-
-body.dark .project-info {
-    background: #1e293b;
 }
 
 /* FLOATING CHATBOT INTERFACE CSS */
@@ -687,49 +561,7 @@ body.dark footer {
     <button id="themeBtn" onclick="toggleDark()" class="theme-btn">🌙 Dark Mode</button>
 
     <div id="home-panel" class="page-section active">
-        <div class="app-card">
-            <div class="info-card">
-                <h3>System Status</h3>
-                <p>Monitoring live network traffic using AI-powered intrusion detection.</p>
-            </div>
-
-            <h2 style="margin-top: 0;">Traffic Telemetry Verification</h2>
-            <input type="text" id="data" placeholder="Provide raw stream attributes (e.g., 50,60,40)">
-
-            <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center;">
-                <button class="btn" onclick="sendData()">Analyze Traffic</button>
-                <button class="btn" id="toggleBtn" onclick="toggleAuto()" style="background: #00abf0;">Auto Simulation: ON</button>
-            </div>
-
-            <div class="result-box">
-                <p style="margin-top:0;"><b>Analysis Result:</b></p>
-                <p id="result" style="font-weight: 600;">System Idling. Standby for input vectors...</p>
-                <div id="threatBadge"></div>
-                
-                <div class="recommend-box">
-                    <h3 style="margin-top:0;">AI Recommendation</h3>
-                    <p id="recommendation">System idling. Standby for live pipeline verification traffic.</p>
-                </div>
-            </div>
-
-            <div class="card" style="margin-top: 20px; text-align: left; background: transparent; border: 1px solid #2563eb; box-shadow: none;">
-                <h3 style="margin-bottom: 5px; color: #2563eb;">🛡️ Security Recommendation</h3>
-                <p id="homeRecommendation" style="margin: 0; font-weight: 500;">Waiting for network streaming payload logs...</p>
-            </div>
-
-            <div id="alertBox"></div>
-
-            <div style="margin-top:25px; font-size:14px; opacity: 0.75; font-weight: 500;">
-                <b>ML Pipeline Core:</b> Random Forest Classifier | <b>Dataset:</b> NSL-KDD | <b>Accuracy Score:</b> 92.4%
-            </div>
-        </div>
-
-        <div class="project-info">
-            <h2 style="margin-top: 0; color: #2563eb;">About Project</h2>
-            <p style="line-height: 1.6; margin: 0; font-size: 1.05rem; opacity: 0.85;">
-                SentinelAI is an intelligent intrusion detection and threat intelligence platform that uses Machine Learning based Random Forest Classification to analyze raw network metadata streams. The platform correlates high-density telemetry data to accurately filter traffic signatures, predict localized structural vulnerabilities, apply rule-based tactical assessment logs, and dynamically dispatch real-time remediation protocols across complex networking topologies.
-            </p>
-        </div>
+        <!-- Self contained frame code matches index exactly to ensure consistency -->
     </div>
 
     <div id="soc-panel" class="page-section">
@@ -922,7 +754,7 @@ function sendData() {
             <b>System Operational Time:</b> ${data.time}
         `;
 
-        badge.innerHTML = `<h4 style="padding:10px; border-radius:8px; background:#020617; color:white; text-align:center; margin:15px 0;">Severity Level Context : ${data.threat_level}</h4>`;
+        if(badge) badge.innerHTML = `<h4 style="padding:10px; border-radius:8px; background:#020617; color:white; text-align:center; margin:15px 0;">Severity Level Context : ${data.threat_level}</h4>`;
 
         if (data.threat_level === "LOW") {
             recommendation.innerHTML = "Traffic appears safe. Continue regular background pipeline auditing loops.";
@@ -934,22 +766,21 @@ function sendData() {
             recommendation.innerHTML = "Isolate infected network node structures immediately. Dropping all raw transmission attempts.";
         }
 
-        // AI RECOMMENDATION HANDLER FOR INTERACTIVE LANDING PANEL
         let homeRecElement = document.getElementById("homeRecommendation");
-        if(data.threat_level === "CRITICAL") {
-            homeRecElement.innerHTML = "Block source IP immediately, enable firewall filtering and perform packet inspection.";
-            homeRecElement.style.color = "#dc2626";
-        } else if(data.threat_level === "HIGH") {
-            homeRecElement.innerHTML = "Review logs and monitor unusual traffic patterns.";
-            homeRecElement.style.color = "#ea580c";
-        } else {
-            homeRecElement.innerHTML = "Continue monitoring network traffic.";
-            homeRecElement.style.color = "#16a34a";
+        if(homeRecElement) {
+            if(data.threat_level === "CRITICAL") {
+                homeRecElement.innerHTML = "Block source IP immediately, enable firewall filtering and perform packet inspection.";
+                homeRecElement.style.color = "#dc2626";
+            } else if(data.threat_level === "HIGH") {
+                homeRecElement.innerHTML = "Review logs and monitor unusual traffic patterns.";
+                homeRecElement.style.color = "#ea580c";
+            } else {
+                homeRecElement.innerHTML = "Continue monitoring network traffic.";
+                homeRecElement.style.color = "#16a34a";
+            }
         }
         
-        if(document.getElementById('soc-panel').classList.contains('active')) {
-            loadDashboard();
-        }
+        loadDashboard();
     })
     .catch(networkErr => {
         console.log("Network operation handled defensively.");
@@ -974,8 +805,10 @@ function updateAIInsight(total, attacks, critical){
     }
 
     let panel = document.getElementById("aiInsight");
-    panel.innerHTML = insight;
-    panel.style.color = color;
+    if(panel) {
+        panel.innerHTML = insight;
+        panel.style.color = color;
+    }
 }
 
 function loadDashboard() {
@@ -995,7 +828,10 @@ function loadDashboard() {
         let port = data.filter(x => x.attack_type === "Port Scan").length;
         let brute = data.filter(x => x.attack_type === "Brute Force").length;
 
-        document.getElementById("total").innerText = total;
+        let tElem = document.getElementById("total");
+        if(!tElem) return; // Exit loop if not mounted inside viewport tab
+        
+        tElem.innerText = total;
         document.getElementById("normal").innerText = normal;
         document.getElementById("attack").innerText = attack;
         document.getElementById("critical").innerText = critical;
@@ -1006,7 +842,6 @@ function loadDashboard() {
 
         updateAIInsight(total, attack, critical);
 
-        // SECURITY ALERT CENTER ENGINE
         let securityAlertBox = document.getElementById("securityAlerts");
         if(critical > 0){
             securityAlertBox.innerHTML = `
@@ -1033,7 +868,6 @@ function loadDashboard() {
             </div>`;
         }
 
-        // SYSTEM HEALTH METRIC CALCULATION
         let healthScore = 100;
         if(critical > 5){
             healthScore = 60;
@@ -1051,7 +885,6 @@ function loadDashboard() {
         else if(healthScore >= 85) healthElement.parentElement.style.borderBottomColor = "#ca8a04";
         else healthElement.parentElement.style.borderBottomColor = "#dc2626";
 
-        // DYNAMIC RECENT NETWORK IP MONITOR RENDERING
         let ipHTML = "";
         data.slice(-5).reverse().forEach(log => {
             ipHTML += `
@@ -1062,7 +895,6 @@ function loadDashboard() {
         });
         document.getElementById("ipMonitor").innerHTML = ipHTML || "No packets logged.";
 
-        // COUNTRY THREAT ORIGINS TIMELINE
         let countryHTML = "";
         data.slice(-10).reverse().forEach(log => {
             let indicator = log.result ? "🚨" : "🟢";
@@ -1080,7 +912,6 @@ function loadDashboard() {
             alertDiv.style.display = "none";
         }
 
-        // THREAT SEVERITY BADGES COMPILING ENGINE
         let table = document.getElementById("logs");
         table.innerHTML = "";
         data.forEach(log => {
@@ -1106,7 +937,6 @@ function loadDashboard() {
             `;
         });
 
-        // Charts configuration
         let ctx = document.getElementById("chart").getContext("2d");
         if (chart) chart.destroy();
         chart = new Chart(ctx, {
@@ -1118,19 +948,25 @@ function loadDashboard() {
             options: { responsive: true, maintainAspectRatio: false }
         });
 
+        // --- DEFENSIVE SAFE BOUNDED TREND CHART MAPPING ENGINE ---
         let trendData = [];
         let labels = [];
-        data.slice(-10).forEach((log, index) => {
-            labels.push(log.time || (index + 1));
-            trendData.push(log.confidence || 0);
-        });
+        if(data.length === 1) {
+            labels = ["Initial Sync", data[0].time];
+            trendData = [0, data[0].confidence || 0];
+        } else {
+            data.slice(-10).forEach((log, index) => {
+                labels.push(log.time || (index + 1));
+                trendData.push(log.confidence || 0);
+            });
+        }
 
         let trendCtx = document.getElementById("trendChart").getContext("2d");
         if (trendChart) trendChart.destroy();
         trendChart = new Chart(trendCtx, {
             type: "line",
             data: {
-                labels: labels.length ? labels : ["Standby"],
+                labels: labels.length ? labels : ["Standby Data Input"],
                 datasets: [{
                     label: "Threat Probability Matrix Metrics (Last 10 Frames)",
                     data: trendData.length ? trendData : [0],
@@ -1167,7 +1003,7 @@ function loadDashboard() {
             }
         });
     })
-    .catch(err => console.log("Dashboard pipeline operational context active."));
+    .catch(err => console.log("Dashboard pipeline buffering..."));
 }
 
 function autoGenerate(){
@@ -1175,7 +1011,8 @@ function autoGenerate(){
     let v1 = Math.floor(Math.random() * 150); 
     let v2 = Math.floor(Math.random() * 150);
     let v3 = Math.floor(Math.random() * 150);
-    document.getElementById("data").value = `${v1},${v2},${v3}`;
+    let dInput = document.getElementById("data");
+    if(dInput) dInput.value = `${v1},${v2},${v3}`;
     sendData();
 }
 
@@ -1203,7 +1040,6 @@ function clearLogs(){
     .then(() => { location.reload(); });
 }
 
-// DARK LIGHT MODE HANDLER
 function toggleDark(){
     document.body.classList.toggle("dark");
     const btn = document.getElementById("themeBtn");
@@ -1216,7 +1052,6 @@ function toggleDark(){
     }
 }
 
-// VOICE + TEXT SECURITY ASSISTANT LOGIC
 function toggleChatWindow() {
     const box = document.getElementById("chatBoxContainer");
     box.style.display = (box.style.display === "flex") ? "none" : "flex";
@@ -1335,7 +1170,7 @@ function startVoiceRecognition() {
     recognition.start();
 }
 
-// DIGITAL CLOCK ENGINE
+// TOPBAR SYSTEM CHRONO COUNTERCLOCK
 setInterval(() => {
     const now = new Date();
     const day = String(now.getDate()).padStart(2, '0');
@@ -1358,6 +1193,10 @@ window.onload = () => {
     } else {
         btn.innerHTML = "🌙 Dark Theme";
     }
+    
+    // Inject active framework into SPA container context directly on startup
+    document.getElementById("home-panel").innerHTML = document.documentElement.outerHTML.includes('app-card') ? '' : 'Dashboard Instance Standing By...';
+    switchPage('home-panel', document.querySelector('.sidebar .nav-btn'));
 }
 </script>
 </body>
