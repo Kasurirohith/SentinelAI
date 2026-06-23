@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CyberShield AI - Control Panel</title>
+<title>SentinelAI - Control Panel</title>
 
 <style>
 body {
@@ -261,7 +261,7 @@ body.dark .recommend-box {
     text-align: center;
 }
 
-/* STEP 9: RECOMMENDATION INTERFACE CARD STYLE */
+/* RECOMMENDATION INTERFACE CARD STYLE */
 .rec-card {
     margin-top: 20px;
     padding: 20px;
@@ -327,7 +327,7 @@ body.dark footer {
 <body>
 
 <div class="sidebar">
-    <h2>CyberShield AI</h2>
+    <h2>SentinelAI</h2>
     <a href="index.html" style="background: #2563eb;">🏠 Home</a>
     <a href="dashboard.html">📊 Dashboard</a>
 </div>
@@ -374,7 +374,7 @@ body.dark footer {
         </div>
 
         <div class="rec-card">
-            <h3><h3>🛡️ Security Recommendation</h3></h3>
+            <h3>🛡️ Security Recommendation</h3>
             <p id="recommendation">Waiting...</p>
         </div>
 
@@ -408,7 +408,7 @@ function sendData() {
 
     let values = document.getElementById("data").value.split(",").map(Number);
 
-    fetch("http://127.0.0.1:5000/predict", {
+    fetch("https://sentinelai-1-wpf0.onrender.com/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ features: values })
@@ -468,9 +468,6 @@ function sendData() {
         Threat Level : ${data.threat_level}
         </h3>`;
 
-        // ==================================================================
-        // STEP 9: INTERACTIVE AI RECOMMENDATION GENERATION JAVASCRIPT
-        // ==================================================================
         if(data.threat_level === "CRITICAL"){
             rec.innerHTML = "Block source IP immediately, enable firewall filtering and perform packet inspection.";
             rec.style.color = "#dc2626";
